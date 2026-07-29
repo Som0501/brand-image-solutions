@@ -1,347 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand Image Solutions — Retail Design &amp; Build for the World's Finest Spirits</title>
-<meta name="description" content="Brand Image Solutions Pvt. Ltd — a Delhi-based retail design-and-build studio crafting in-store branding, displays and complete fit-outs for the world's leading spirits brands. 10+ years, in-house production, pan-India execution.">
-<meta name="theme-color" content="#14100a">
-<meta property="og:title" content="Brand Image Solutions — Retail theatres for the world's finest spirits">
-<meta property="og:description" content="Delhi-based retail design-and-build studio for premium spirits brands. Concept to maintenance, entirely in-house.">
+<title>Brand Image Solutions · Retail Theatres for the World's Finest Spirits</title>
+<meta name="description" content="Brand Image Solutions Pvt. Ltd is a Delhi based retail design and build studio crafting in-store branding, illuminated displays, signage and complete fit-outs for the world's leading spirits brands. 10+ years, in-house production, pan-India execution.">
+<meta name="theme-color" content="#0e0b07">
+<meta property="og:title" content="Brand Image Solutions · Retail theatres for the world's finest spirits">
+<meta property="og:description" content="Delhi based retail design and build studio for premium spirits brands. Concept to installation, all in-house.">
 <meta property="og:type" content="website">
-<!-- Link preview image (WhatsApp / social). Relative path works on most hosts.
-     If the thumbnail doesn't appear, set this to the FULL url after you deploy,
-     e.g. https://your-site.netlify.app/images/glenfiddich/glenfiddich-event-bar-blue-01.jpg -->
-<meta property="og:image" content="images/glenfiddich/glenfiddich-event-bar-blue-01.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="900">
+<meta property="og:image" content="images/site/hero-pipers.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="images/logo/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500;1,6..96,600&family=Archivo:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Archivo:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ===================== LOADER ===================== -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader__frame">
-    <img class="loader__horse" src="images/logo/logo-mark.png" alt="" width="120" height="120">
-    <span class="loader__word">Bringing the lights up</span>
-  </div>
-</div>
+<div class="progress" id="progress" aria-hidden="true"><span id="progressFill"></span></div>
 
-<!-- ===================== NAV ===================== -->
+<!-- floating WhatsApp -->
+<a class="wa" href="https://wa.me/919811040405?text=Hi%20Brand%20Image%20Solutions%2C%20I%27d%20like%20to%20discuss%20a%20retail%20branding%20project." target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+  <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.35.67 4.55 1.84 6.4L4 29l7.76-1.8a12 12 0 0 0 4.28.8h.01C22.7 28 28.1 22.6 28.1 15.96 28.1 8.4 22.68 3 16.04 3Zm0 21.9h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-4.6 1.07 1.09-4.48-.24-.37a9.86 9.86 0 0 1-1.51-5.25c0-5.46 4.45-9.9 9.92-9.9 2.65 0 5.14 1.03 7.01 2.9a9.83 9.83 0 0 1 2.9 7A9.92 9.92 0 0 1 16.04 24.9Zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>
+  <span class="wa__pulse" aria-hidden="true"></span>
+  <span class="wa__tip">Chat with us</span>
+</a>
+
+<!-- nav -->
 <header class="nav" id="nav">
-  <div class="nav__inner">
-    <a class="nav__brand" href="#top" aria-label="Brand Image Solutions — home">
-      <img class="nav__logo" src="images/logo/logo-mark.png" alt="" aria-hidden="true" width="38" height="38">
-      <span class="nav__word">Brand&nbsp;Image<em>Solutions</em></span>
+  <div class="nav__row">
+    <a class="brand" href="#top" aria-label="Brand Image Solutions, home">
+      <img class="brand__mark" src="images/logo/logo-mark.png" alt="" aria-hidden="true" width="40" height="40">
+      <span class="brand__txt">Brand Image<em>Solutions</em></span>
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#studio">Studio</a>
-      <a href="#approach">Approach</a>
-      <a href="#services">Services</a>
+      <a href="#lights">The Lights</a>
+      <a href="#capabilities">Capabilities</a>
       <a href="#work">Work</a>
       <a href="#contact" class="nav__cta">Start a project</a>
     </nav>
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menu">
-      <span></span><span></span>
-    </button>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
   </div>
-  <div class="nav__mobile" id="mobileMenu">
-    <a href="#studio">Studio</a>
-    <a href="#approach">Approach</a>
-    <a href="#services">Services</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Start a project</a>
+  <div class="menu" id="menu">
+    <a href="#studio">Studio</a><a href="#lights">The Lights</a><a href="#capabilities">Capabilities</a><a href="#work">Work</a><a href="#reels">Reels</a><a href="#contact">Start a project</a>
   </div>
 </header>
 
 <main id="top">
 
-<!-- ===================== HERO — the lit back-bar ===================== -->
+<!-- HERO -->
 <section class="hero" aria-label="Introduction">
-  <div class="hero__wall" aria-hidden="true">
-    <div class="hero__grid" id="heroGrid"></div>
-    <div class="hero__veil"></div>
+  <div class="hero__slides" aria-hidden="true">
+    <div class="hero__slide" style="background-image:url('images/site/hero-pipers.jpg')"></div>
+    <div class="hero__slide" style="background-image:url('images/site/hero-jacobs.jpg')"></div>
+    <div class="hero__slide" style="background-image:url('images/site/hero-campo.jpg')"></div>
+    <div class="hero__slide" style="background-image:url('images/site/hero-chivasbar.jpg')"></div>
+    <div class="hero__scrim"></div>
   </div>
-
-  <div class="hero__inner">
-    <p class="tag hero__eyebrow"><span class="tag__rule"></span>Brand Image Solutions · Retail design &amp; build · New Delhi</p>
-    <h1 class="h1 hero__title" aria-label="Retail theatres for the world's finest spirits.">
-      <span class="hero__line"><span>Retail theatres</span></span>
-      <span class="hero__line"><span>for the world's</span></span>
-      <span class="hero__line"><span><em>finest spirits.</em></span></span>
-    </h1>
-    <p class="hero__sub">We design, build and maintain the shops, bars and brand spaces where Glenfiddich, Chivas, Jameson and Johnnie Walker meet their customers — from first sketch to final polish, entirely under our own roof.</p>
-    <div class="hero__actions">
-      <a class="btn btn--gold" href="#work">View the work <span class="btn__ico" aria-hidden="true">→</span></a>
-      <a class="btn btn--ghost" href="#contact">Start a project</a>
+  <div class="hero__body wrap">
+    <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>Retail design and build · New Delhi</p>
+    <h1 class="hero__title" data-aos="fade-up" data-aos-delay="80">Retail theatres for the world's <em>finest spirits.</em></h1>
+    <p class="hero__sub" data-aos="fade-up" data-aos-delay="160">We design, build and illuminate the shops, bars and brand spaces where the world's leading spirits meet their customers. From first sketch to final glow, all under one roof.</p>
+    <div class="hero__cta" data-aos="fade-up" data-aos-delay="240">
+      <a class="btn btn--fill" href="#work">View the work <i aria-hidden="true">&rarr;</i></a>
+      <a class="btn btn--line" href="#contact">Start a project</a>
     </div>
   </div>
-
-  <p class="hero__meta" aria-hidden="true"><b>↖</b> Move across the wall<br>to bring the lights up</p>
-
-  <a class="hero__cue" href="#studio" aria-label="Scroll to the studio">
-    Scroll
-    <span class="hero__cueline" aria-hidden="true"><span></span></span>
-  </a>
+  <div class="hero__foot wrap" data-aos="fade" data-aos-delay="400">
+    <div class="hero__ticks"><span>Concept</span><i></i><span>Design</span><i></i><span>Production</span><i></i><span>Install</span></div>
+    <a class="hero__scroll" href="#studio" aria-label="Scroll to studio"><span>Scroll</span><i aria-hidden="true"></i></a>
+  </div>
 </section>
 
-<!-- ===================== STUDIO ===================== -->
-<section class="studio section" id="studio">
-  <div class="container">
-    <div class="studio__grid">
-      <div class="studio__copy" data-reveal>
-        <div class="studio__head">
-          <p class="tag" style="margin-bottom:1.4rem"><span class="tag__rule"></span>The studio</p>
-          <h2 class="h2">A decade of retail<br><em>brand building.</em></h2>
-        </div>
-        <p class="lead">Every brand walks into a room differently. Our work begins with that difference — the heritage, the palette, the ritual of the pour — and ends with a finished space that feels unmistakably <em>theirs</em>.</p>
-        <p>We design from scratch around each brand's aesthetics and values, then build everything ourselves: woodwork, offset and digital print, signage, lighting. Because production never leaves our house, neither does quality. And because our teams install and maintain across India, a concept approved in Delhi looks exactly right in Mumbai, Bengaluru or Guwahati — on opening day and a year later.</p>
-        <p>One studio. One standard. <span class="gold">Concept to maintenance, 360° turnkey.</span></p>
-      </div>
+<!-- MARQUEE -->
+<section class="strip" aria-label="Brands we have built for">
+  <div class="marq">
+    <div class="marq__row"><div class="marq__set"><span>Glenfiddich</span><i>&loz;</i><span>Chivas Regal</span><i>&loz;</i><span>Jameson</span><i>&loz;</i><span>Absolut</span><i>&loz;</i><span>The Glenlivet</span><i>&loz;</i><span>Ballantine's</span><i>&loz;</i><span>Talisker</span><i>&loz;</i><span>100 Pipers</span><i>&loz;</i></div><div class="marq__set" aria-hidden="true"><span>Glenfiddich</span><i>&loz;</i><span>Chivas Regal</span><i>&loz;</i><span>Jameson</span><i>&loz;</i><span>Absolut</span><i>&loz;</i><span>The Glenlivet</span><i>&loz;</i><span>Ballantine's</span><i>&loz;</i><span>Talisker</span><i>&loz;</i><span>100 Pipers</span><i>&loz;</i></div></div>
+    <div class="marq__row marq__row--rev"><div class="marq__set"><span>Blenders Pride</span><i>&loz;</i><span>Royal Stag</span><i>&loz;</i><span>Imperial Blue</span><i>&loz;</i><span>Seagram's</span><i>&loz;</i><span>Oaken Glow</span><i>&loz;</i><span>Soorahi</span><i>&loz;</i><span>Monkey Shoulder</span><i>&loz;</i><span>Jacob's Creek</span><i>&loz;</i></div><div class="marq__set" aria-hidden="true"><span>Blenders Pride</span><i>&loz;</i><span>Royal Stag</span><i>&loz;</i><span>Imperial Blue</span><i>&loz;</i><span>Seagram's</span><i>&loz;</i><span>Oaken Glow</span><i>&loz;</i><span>Soorahi</span><i>&loz;</i><span>Monkey Shoulder</span><i>&loz;</i><span>Jacob's Creek</span><i>&loz;</i></div></div>
+  </div>
+</section>
 
-      <div class="studio__media" data-reveal data-delay="1">
-        <figure class="vitrine vitrine--a">
-          <img src="images/production/production-house-machinery-01.jpg" alt="In-house production machinery at the Brand Image Solutions workshop" loading="lazy" width="885" height="399">
-          <figcaption>In-house production · Delhi NCR</figcaption>
-        </figure>
-        <figure class="vitrine vitrine--b">
-          <img src="images/production/factory-work-area-01.jpg" alt="Fabrication floor and work area at the production house" loading="lazy" width="885" height="399">
-          <figcaption>Woodwork, print &amp; fabrication floor</figcaption>
-        </figure>
+<!-- STUDIO -->
+<section class="studio" id="studio">
+  <div class="wrap">
+    <div class="studio__top">
+      <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>The studio</p>
+      <h2 class="display" data-aos="fade-up">A decade of retail <em>brand building.</em></h2>
+    </div>
+    <div class="studio__cols">
+      <div class="studio__copy">
+        <p class="lead" data-aos="fade-up">Every brand walks into a room differently. We design around that difference, then build all of it ourselves.</p>
+        <p data-aos="fade-up">Woodwork, print, signage and lighting, made under our roof and installed across India, store by store.</p>
+        <p class="pull" data-aos="fade-up">One studio, one standard. <span class="gold">Concept to installation, fully turnkey.</span></p>
+      </div>
+      <div class="studio__media">
+        <figure class="frame" data-aos="fade-up"><img src="images/site/studio-1.jpg" alt="In-house CNC and fabrication machinery at the production house" loading="lazy"><figcaption>In-house production, Delhi NCR</figcaption></figure>
+        <figure class="frame frame--shift" data-aos="fade-up" data-aos-delay="100"><img src="images/site/studio-2.jpg" alt="Woodwork and fabrication floor" loading="lazy"><figcaption>Woodwork and fabrication floor</figcaption></figure>
       </div>
     </div>
-
-    <dl class="ledger" data-reveal>
-      <div class="ledger__cell">
-        <dd class="ledger__num"><span data-count="10" data-suffix="+">10+</span></dd>
-        <dt class="ledger__label">Years of craft</dt>
-      </div>
-      <div class="ledger__cell">
-        <dd class="ledger__num"><span data-count="15" data-suffix="+">15+</span></dd>
-        <dt class="ledger__label">Spirits brands served</dt>
-      </div>
-      <div class="ledger__cell">
-        <dd class="ledger__num"><span data-count="100" data-suffix="%">100%</span></dd>
-        <dt class="ledger__label">Production in-house</dt>
-      </div>
-      <div class="ledger__cell">
-        <dd class="ledger__word">Pan-India</dd>
-        <dt class="ledger__label">Execution &amp; maintenance</dt>
-      </div>
+    <dl class="stats" data-aos="fade-up">
+      <div class="stat"><dd class="stat__n">10+</dd><dt>Years of craft</dt></div>
+      <div class="stat"><dd class="stat__n">18+</dd><dt>Spirits brands served</dt></div>
+      <div class="stat"><dd class="stat__n">100%</dd><dt>Production in-house</dt></div>
+      <div class="stat"><dd class="stat__n stat__word">Pan-India</dd><dt>Nationwide install</dt></div>
     </dl>
   </div>
-</section>
-
-<!-- ===================== APPROACH — pinned build sequence ===================== -->
-<section class="approach" id="approach" aria-label="Our turnkey approach">
-  <div class="approach__track" id="approachTrack">
-    <div class="approach__sticky">
-      <span class="approach__ghost" id="approachGhost" aria-hidden="true">01</span>
-      <div class="approach__inner">
-        <div class="approach__head">
-          <p class="tag" style="margin-bottom:1.2rem"><span class="tag__rule"></span>The turnkey approach</p>
-          <h2 class="h2" style="margin-bottom:0">One studio,<br><em>five stages.</em></h2>
-          <p class="approach__intro">Every project runs the full distance under our own roof — from the first conversation to the upkeep years later. Scroll to follow the build.</p>
-        </div>
-        <ol class="steps" id="steps">
-          <li class="step is-active" data-step="0">
-            <span class="step__num">01 / 05</span>
-            <div class="step__body">
-              <h3 class="step__name">Concept</h3>
-              <p class="step__desc">We listen first. Brand guidelines, retail context and footfall, distilled into a creative direction true to the label on the bottle.</p>
-            </div>
-          </li>
-          <li class="step" data-step="1">
-            <span class="step__num">02 / 05</span>
-            <div class="step__body">
-              <h3 class="step__name">Design</h3>
-              <p class="step__desc">Spatial drawings, material palettes and 3D visuals — designed from scratch around each brand's aesthetic and values.</p>
-            </div>
-          </li>
-          <li class="step" data-step="2">
-            <span class="step__num">03 / 05</span>
-            <div class="step__body">
-              <h3 class="step__name">Production</h3>
-              <p class="step__desc">Woodwork, offset and digital print, lighting and finishing — all produced under our own roof, to our own standard.</p>
-            </div>
-          </li>
-          <li class="step" data-step="3">
-            <span class="step__num">04 / 05</span>
-            <div class="step__body">
-              <h3 class="step__name">Installation</h3>
-              <p class="step__desc">Our crews install pan-India, store by store, so the approved design is the delivered design — everywhere.</p>
-            </div>
-          </li>
-          <li class="step" data-step="4">
-            <span class="step__num">05 / 05</span>
-            <div class="step__body">
-              <h3 class="step__name">Maintenance</h3>
-              <p class="step__desc">We stay after the ribbon is cut — servicing, refreshing and repairing so every space looks like day one, every day.</p>
-            </div>
-          </li>
-        </ol>
-        <div class="approach__rail" aria-hidden="true"><span class="approach__railFill" id="approachFill"></span></div>
-      </div>
+  <div class="craft">
+    <div class="craft__bg" aria-hidden="true">
+      <video muted loop playsinline preload="none" data-lazy poster="videos/edited_media/stills/19-copper-pipe-craft.jpg" data-src="videos/edited_media/reels/19-copper-pipe-craft.mp4"></video>
+      <div class="craft__scrim"></div>
+    </div>
+    <div class="wrap craft__inner">
+      <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>Made under our roof</p>
+      <h2 class="display" data-aos="fade-up">Built by <em>hand.</em></h2>
     </div>
   </div>
 </section>
 
-<!-- ===================== SERVICES ===================== -->
-<section class="services section" id="services">
-  <div class="container">
-    <p class="tag" data-reveal style="margin-bottom:1.4rem"><span class="tag__rule"></span>What we build</p>
-    <h2 class="h2" data-reveal>Six disciplines,<br><em>one signature.</em></h2>
+<!-- THE LIGHTS -->
+<section class="lights" id="lights" aria-label="Illuminated signage in action">
+  <div class="wrap sec__head">
+    <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>Bring the lights up</p>
+    <h2 class="display" data-aos="fade-up">The glow that <em>sells the pour.</em></h2>
+    <p class="sec__intro" data-aos="fade-up">Neon, backlit fascia, LED and infinity mirrors, designed, wired and finished in-house. Hover any panel to bring it to life.</p>
+  </div>
+  <div class="wrap media-grid" id="lightsGrid" data-aos="fade-up"></div>
+</section>
 
-    <ul class="svc" role="list">
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Bars · Floors</span>
-        <h3 class="svc__name">On-Trade &amp; Off-Trade Retail Architecture</h3>
-        <p class="svc__desc">Bars, lounges and retail floors engineered for how spirits are actually browsed, poured and bought.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Counters · Gondolas</span>
-        <h3 class="svc__name">Brand Displays &amp; Visual Merchandising</h3>
-        <p class="svc__desc">Counters, gondolas, podiums and back-bars that put the bottle on a stage worth its price tag.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Turnkey</span>
-        <h3 class="svc__name">Complete Shop Fit-Outs</h3>
-        <p class="svc__desc">Full-store transformations — flooring to ceiling, shelving to checkout — delivered turnkey.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Activations</span>
-        <h3 class="svc__name">Experiential &amp; Event Builds</h3>
-        <p class="svc__desc">Tasting bars, launch sets and festival activations built fast, finished beautifully.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Neon · Backlit</span>
-        <h3 class="svc__name">Signage &amp; Lighting</h3>
-        <p class="svc__desc">Neon, backlit fascia and ambient schemes — the warm glow that sells a single malt.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-      <li class="svc__row" data-reveal>
-        <span class="svc__tag">Beyond Shelf</span>
-        <h3 class="svc__name">Films, R&amp;R &amp; MICE</h3>
-        <p class="svc__desc">Brand films, rewards &amp; recognition properties, meetings and incentive experiences — the brand, beyond the shelf.</p>
-        <span class="svc__arrow" aria-hidden="true">→</span>
-      </li>
-    </ul>
+<!-- CAPABILITIES -->
+<section class="caps" id="capabilities">
+  <div class="wrap sec__head">
+    <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>What we do</p>
+    <h2 class="display" data-aos="fade-up">Six disciplines, <em>one roof.</em></h2>
+  </div>
+  <div class="wrap cap-grid">
+    <article class="cap" data-aos="fade-up" style="background-image:url('images/site/cap-fitouts.jpg')"><div class="cap__b"><span class="cap__n">01</span><h3>Complete Fit-Outs</h3><p>Full store transformations, floor to ceiling, delivered turnkey.</p></div></article>
+    <article class="cap" data-aos="fade-up" data-aos-delay="60" style="background-image:url('images/site/cap-displays.jpg')"><div class="cap__b"><span class="cap__n">02</span><h3>Displays and VM</h3><p>Counters, gondolas and podiums that stage the bottle.</p></div></article>
+    <article class="cap" data-aos="fade-up" data-aos-delay="120" style="background-image:url('videos/edited_media/stills/06-absolut-neon-bottles.jpg')"><div class="cap__b"><span class="cap__n">03</span><h3>Signage and Lighting</h3><p>Neon, backlit fascia and LED, wired and finished by us.</p></div></article>
+    <article class="cap" data-aos="fade-up" style="background-image:url('images/site/cap-bars.jpg')"><div class="cap__b"><span class="cap__n">04</span><h3>Bars and Lounges</h3><p>On-trade spaces built for how spirits are poured and bought.</p></div></article>
+    <article class="cap" data-aos="fade-up" data-aos-delay="60" style="background-image:url('images/site/cap-events.jpg')"><div class="cap__b"><span class="cap__n">05</span><h3>Events and Activations</h3><p>Tasting bars, launch sets and exhibition booths.</p></div></article>
+    <article class="cap" data-aos="fade-up" data-aos-delay="120" style="background-image:url('images/site/cap-production.jpg')"><div class="cap__b"><span class="cap__n">06</span><h3>In-House Production</h3><p>Woodwork, print, metal and finishing, all under our roof.</p></div></article>
   </div>
 </section>
 
-<!-- ===================== WORK ===================== -->
-<section class="work section" id="work">
-  <div class="container">
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
     <div class="work__head">
       <div>
-        <p class="tag" data-reveal style="margin-bottom:1.4rem"><span class="tag__rule"></span>Selected work</p>
-        <h2 class="h2" data-reveal style="margin-bottom:.4rem">Built for the<br><em>back bar &amp; beyond.</em></h2>
+        <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>Selected work</p>
+        <h2 class="display" data-aos="fade-up">Built for the <em>back bar.</em></h2>
       </div>
-      <p class="work__note" data-reveal data-delay="1">Filter by brand. Every space below was designed, produced and installed by our own teams. Tap any piece to bring it into the light.</p>
+      <p class="work__note" data-aos="fade-up">Every space was designed, produced and installed by our own teams. Filter by brand, hover to preview, click to open.</p>
     </div>
-
-    <div class="filters" id="filters" role="tablist" aria-label="Filter projects by brand" data-reveal>
-      <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
-      <button class="filter" data-filter="glenfiddich" aria-pressed="false">Glenfiddich</button>
-      <button class="filter" data-filter="glenlivet" aria-pressed="false">Glenlivet</button>
-      <button class="filter" data-filter="chivas" aria-pressed="false">Chivas</button>
-      <button class="filter" data-filter="ballantines" aria-pressed="false">Ballantine's</button>
-      <button class="filter" data-filter="jameson" aria-pressed="false">Jameson</button>
-      <button class="filter" data-filter="johnnie-walker" aria-pressed="false">Johnnie Walker</button>
-      <button class="filter" data-filter="black-dog" aria-pressed="false">Black Dog</button>
-      <button class="filter" data-filter="blenders" aria-pressed="false">Blenders Pride · Royal Stag · Oaken Glow</button>
-      <button class="filter" data-filter="pipers" aria-pressed="false">100 Pipers</button>
-      <button class="filter" data-filter="shops" aria-pressed="false">Premium Shops &amp; Interiors</button>
+    <div class="filters" id="filters" role="tablist" aria-label="Filter projects by brand" data-aos="fade-up">
+      <button class="chip is-on" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="glenfiddich">Glenfiddich</button>
+      <button class="chip" data-filter="jameson">Jameson</button>
+      <button class="chip" data-filter="absolut">Absolut</button>
+      <button class="chip" data-filter="chivas">Chivas</button>
+      <button class="chip" data-filter="glenlivet">Glenlivet</button>
+      <button class="chip" data-filter="pipers">100 Pipers</button>
+      <button class="chip" data-filter="seagram">Blenders · Seagram's</button>
+      <button class="chip" data-filter="soorahi">Soorahi</button>
+      <button class="chip" data-filter="shops">Premium Shops</button>
     </div>
-
-    <div class="gallery" id="gallery" aria-live="polite"></div>
+    <div class="media-grid" id="workGrid" aria-live="polite"></div>
   </div>
 </section>
 
-<!-- ===================== BRANDS MARQUEE ===================== -->
-<section class="brands" id="brands" aria-label="Brands we've built for">
-  <div class="container brands__head">
-    <p class="tag" data-reveal><span class="tag__rule"></span>Brands we've built for</p>
+<!-- REELS -->
+<section class="reels" id="reels" aria-label="Reels">
+  <div class="wrap sec__head">
+    <p class="eyebrow" data-aos="fade-up"><span class="eyebrow__rule"></span>From the floor</p>
+    <h2 class="display" data-aos="fade-up">Reels.</h2>
   </div>
-  <div class="marquee" data-reveal>
-    <div class="marquee__row marquee__row--a">
-      <div class="marquee__track">
-        <span>Glenfiddich</span><i>◆</i><span>Chivas Regal</span><i>◆</i><span>Jameson</span><i>◆</i><span>Johnnie Walker</span><i>◆</i><span>The Glenlivet</span><i>◆</i><span>Ballantine's</span><i>◆</i><span>Talisker</span><i>◆</i><span>Black Dog</span><i>◆</i>
-        <span>Glenfiddich</span><i>◆</i><span>Chivas Regal</span><i>◆</i><span>Jameson</span><i>◆</i><span>Johnnie Walker</span><i>◆</i><span>The Glenlivet</span><i>◆</i><span>Ballantine's</span><i>◆</i><span>Talisker</span><i>◆</i><span>Black Dog</span><i>◆</i>
-      </div>
-    </div>
-    <div class="marquee__row marquee__row--b">
-      <div class="marquee__track">
-        <span>Blenders Pride</span><i>◆</i><span>Royal Stag</span><i>◆</i><span>100 Pipers</span><i>◆</i><span>Monkey Shoulder</span><i>◆</i><span>Oaken Glow</span><i>◆</i><span>Passport</span><i>◆</i><span>Jacob's Creek</span><i>◆</i><span>Campo Viejo</span><i>◆</i>
-        <span>Blenders Pride</span><i>◆</i><span>Royal Stag</span><i>◆</i><span>100 Pipers</span><i>◆</i><span>Monkey Shoulder</span><i>◆</i><span>Oaken Glow</span><i>◆</i><span>Passport</span><i>◆</i><span>Jacob's Creek</span><i>◆</i><span>Campo Viejo</span><i>◆</i>
-      </div>
-    </div>
-  </div>
+  <div class="reels__track" id="reelTrack"></div>
 </section>
 
-<!-- ===================== BEYOND SPIRITS ===================== -->
-<section class="beyond section" id="beyond">
-  <div class="container beyond__grid">
-    <div class="beyond__copy" data-reveal>
-      <p class="tag" style="margin-bottom:1.4rem"><span class="tag__rule"></span>Beyond spirits</p>
-      <h3 class="h3">The same craft, <em>other counters.</em></h3>
-      <p>The discipline that builds a single-malt lounge translates cleanly to any premium retail floor. We've brought the same in-house design and build standard to technology and lifestyle brands across India.</p>
-    </div>
-    <div class="beyond__media" data-reveal data-delay="1">
-      <figure class="vitrine">
-        <img src="images/other-retail/lenovo-store-front-01.jpg" alt="Lenovo exclusive store front, designed and built by Brand Image Solutions" loading="lazy" width="654" height="490">
-        <figcaption>Lenovo · Store front</figcaption>
-      </figure>
-      <figure class="vitrine">
-        <img src="images/other-retail/canon-store-interior-01.jpg" alt="Canon Image Square store interior" loading="lazy" width="378" height="284">
-        <figcaption>Canon · Store interior</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CONTACT ===================== -->
-<section class="contact section" id="contact">
-  <div class="container contact__grid">
-    <div class="contact__info" data-reveal>
-      <p class="tag" style="margin-bottom:1.4rem"><span class="tag__rule"></span>Start a project</p>
-      <h2 class="h2">Let's build your<br><em>next pour.</em></h2>
-      <p class="contact__pitch">Tell us about the brand, the space and the timeline. We'll come back with first thinking — usually within two working days.</p>
-      <address class="contact__details">
-        <p><span class="contact__label">Studio</span>Brand Image Solutions Pvt. Ltd<br>Arjan Garh, New Delhi, India</p>
-        <p><span class="contact__label">Phone</span><a href="tel:+919811040405">+91 98110 40405</a></p>
-        <p><span class="contact__label">Email</span><a href="mailto:rajan@brandimagesolutions.co.in">rajan@brandimagesolutions.co.in</a></p>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap contact__grid">
+    <div class="contact__info" data-aos="fade-up">
+      <p class="eyebrow"><span class="eyebrow__rule"></span>Start a project</p>
+      <h2 class="display">Let's build your <em>next pour.</em></h2>
+      <p class="contact__pitch">Tell us about the brand, the space and the timeline. Send it to our WhatsApp and we will reply with first thinking, usually within two working days.</p>
+      <a class="wa-cta" href="https://wa.me/919811040405?text=Hi%20Brand%20Image%20Solutions%2C%20I%27d%20like%20to%20discuss%20a%20retail%20branding%20project." target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.35.67 4.55 1.84 6.4L4 29l7.76-1.8a12 12 0 0 0 4.28.8h.01C22.7 28 28.1 22.6 28.1 15.96 28.1 8.4 22.68 3 16.04 3Zm0 21.9h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-4.6 1.07 1.09-4.48-.24-.37a9.86 9.86 0 0 1-1.51-5.25c0-5.46 4.45-9.9 9.92-9.9 2.65 0 5.14 1.03 7.01 2.9a9.83 9.83 0 0 1 2.9 7A9.92 9.92 0 0 1 16.04 24.9Zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>
+        Message us on WhatsApp
+      </a>
+      <address class="contact__meta">
+        <p><span>Studio</span>Brand Image Solutions Pvt. Ltd<br>Arjan Garh, New Delhi, India</p>
+        <p><span>Phone</span><a href="tel:+919811040405">+91 98110 40405</a></p>
+        <p><span>Email</span><a href="mailto:rajan@brandimagesolutions.co.in">rajan@brandimagesolutions.co.in</a></p>
       </address>
     </div>
-
-    <form class="form" id="enquiryForm" data-reveal data-delay="1" novalidate>
-      <div class="form__field">
-        <label for="f-name">Your name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
-      </div>
-      <div class="form__field">
-        <label for="f-company">Company / brand</label>
-        <input id="f-company" name="company" type="text" autocomplete="organization" required>
-      </div>
-      <div class="form__field">
-        <label for="f-email">Email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" required>
-      </div>
-      <div class="form__field">
-        <label for="f-message">Tell us about the project</label>
-        <textarea id="f-message" name="message" rows="5" required></textarea>
-      </div>
-      <button class="btn btn--gold form__submit" type="submit">Send enquiry <span class="btn__ico" aria-hidden="true">→</span></button>
+    <form class="form" id="form" data-aos="fade-up" data-aos-delay="100" novalidate>
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-company">Company / brand</label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+      <div class="field"><label for="f-msg">Tell us about the project</label><textarea id="f-msg" name="message" rows="5" required></textarea></div>
+      <button class="btn btn--fill form__send" type="submit">Send via WhatsApp <i aria-hidden="true">&rarr;</i></button>
       <p class="form__status" id="formStatus" role="status"></p>
     </form>
   </div>
@@ -349,31 +211,26 @@
 
 </main>
 
-<footer class="footer">
-  <div class="container footer__inner">
-    <img class="footer__logo" src="images/logo/logo-full.png" alt="Brand Image Solutions India" width="188">
-    <p class="footer__line">Retail design &amp; build · Arjan Garh, New Delhi</p>
-    <p class="footer__legal">© <span id="year"></span> Brand Image Solutions Pvt. Ltd. All brand names and marks shown belong to their respective owners and appear here as records of commissioned work.</p>
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <img class="foot__logo" src="images/logo/logo-full.png" alt="Brand Image Solutions India" width="200">
+    <p class="foot__line">Retail design and build · Arjan Garh, New Delhi</p>
+    <p class="foot__legal">&copy; <span id="year"></span> Brand Image Solutions Pvt. Ltd. All brand names and marks shown belong to their respective owners and appear as records of commissioned work.</p>
   </div>
 </footer>
 
-<!-- Lightbox -->
-<dialog class="lightbox" id="lightbox" aria-label="Project viewer">
-  <div class="lightbox__stage">
-    <span class="lightbox__count" id="lightboxCount"></span>
-    <button class="lightbox__close" id="lightboxClose" aria-label="Close viewer">✕</button>
-    <button class="lb-btn lb-prev" id="lightboxPrev" aria-label="Previous project">‹</button>
-    <button class="lb-btn lb-next" id="lightboxNext" aria-label="Next project">›</button>
-    <figure>
-      <img id="lightboxImg" src="" alt="">
-      <figcaption>
-        <span class="lightbox__cap" id="lightboxCap"></span>
-        <span class="lightbox__sub" id="lightboxSub"></span>
-      </figcaption>
-    </figure>
+<!-- lightbox -->
+<dialog class="lbx" id="lbx" aria-label="Project viewer">
+  <div class="lbx__stage">
+    <span class="lbx__count" id="lbxCount"></span>
+    <button class="lbx__x" id="lbxClose" aria-label="Close">&times;</button>
+    <button class="lbx__nav lbx__prev" id="lbxPrev" aria-label="Previous">&lsaquo;</button>
+    <button class="lbx__nav lbx__next" id="lbxNext" aria-label="Next">&rsaquo;</button>
+    <figure><div class="lbx__mediaBox" id="lbxMedia"></div><figcaption><span class="lbx__brand" id="lbxBrand"></span><span class="lbx__type" id="lbxType"></span></figcaption></figure>
   </div>
 </dialog>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -1,368 +1,127 @@
-/* =================================================================
-   BRAND IMAGE SOLUTIONS — interactions
-   Vanilla JS. Lit back-bar hero, reveal-on-scroll, pinned approach,
-   count-up ledger, filterable vitrine gallery, prev/next lightbox,
-   enquiry form, loader.
-   ================================================================= */
-(() => {
+/* Brand Image Solutions - interactions */
+(function(){
   "use strict";
+  const $=(s,c)=>(c||document).querySelector(s), $$=(s,c)=>[...(c||document).querySelectorAll(s)];
+  const V="videos/edited_media/";
+  const poster=f=>V+"stills/"+f.replace(/^.*\//,"").replace(".mp4",".jpg");
+  if(window.AOS) AOS.init({duration:800,easing:"ease-out-cubic",once:true,offset:60});
 
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const fine   = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  /* nav */
+  const nav=$("#nav"), burger=$("#burger");
+  addEventListener("scroll",()=>{ nav.classList.toggle("is-stuck",scrollY>40);
+    const h=document.documentElement; $("#progressFill").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"; },{passive:true});
+  burger.addEventListener("click",()=>{ const o=nav.classList.toggle("is-open"); burger.setAttribute("aria-expanded",o); });
+  $$(".menu a").forEach(a=>a.addEventListener("click",()=>{ nav.classList.remove("is-open"); burger.setAttribute("aria-expanded",false); }));
 
-  /* ============ Project data ============ */
-  const PROJECTS = [
-    // Glenfiddich
-    { src: "images/glenfiddich/glenfiddich-event-bar-blue-01.jpg",        cat: "glenfiddich",    brand: "Glenfiddich",        type: "Event bar" },
-    { src: "images/glenfiddich/glenfiddich-outdoor-bar-01.jpg",           cat: "glenfiddich",    brand: "Glenfiddich",        type: "Outdoor bar" },
-    { src: "images/glenfiddich/glenfiddich-event-counter-01.jpg",         cat: "glenfiddich",    brand: "Glenfiddich",        type: "Event counter" },
-    { src: "images/glenfiddich/glenfiddich-display-stand-01.jpg",         cat: "glenfiddich",    brand: "Glenfiddich",        type: "Display stand" },
-    // Glenlivet
-    { src: "images/glenlivet/glenlivet-shop-interior-01.jpg",             cat: "glenlivet",      brand: "The Glenlivet",      type: "Shop interior" },
-    { src: "images/shops/glenlivet-barrel-lounge-01.jpg",                 cat: "glenlivet",      brand: "The Glenlivet",      type: "Barrel lounge" },
-    { src: "images/shops/glenlivet-wood-lounge-01.jpg",                   cat: "glenlivet",      brand: "The Glenlivet",      type: "Lounge build" },
-    { src: "images/shops/glenlivet-reception-counter-01.jpg",             cat: "glenlivet",      brand: "The Glenlivet",      type: "Reception counter" },
-    // Chivas
-    { src: "images/chivas/chivas-lounge-display-01.jpg",                  cat: "chivas",         brand: "Chivas Regal",       type: "Lounge display" },
-    { src: "images/chivas/chivas-glenlivet-shop-01.jpg",                  cat: "chivas",         brand: "Chivas · Glenlivet", type: "Premium shop" },
-    { src: "images/chivas/chivas-lounge-armchairs-01.jpg",                cat: "chivas",         brand: "Chivas Regal",       type: "Lounge seating" },
-    { src: "images/chivas/chivas-display-wall-01.jpg",                    cat: "chivas",         brand: "Chivas Regal",       type: "Display wall" },
-    { src: "images/chivas/chivas-lounge-seating-01.jpg",                  cat: "chivas",         brand: "Chivas Regal",       type: "Lounge build" },
-    { src: "images/shops/chivas-glenlivet-counter-01.jpg",               cat: "chivas",         brand: "Chivas · Glenlivet", type: "Counter build" },
-    // Ballantine's
-    { src: "images/ballantines/ballantines-neon-bar-blue-01.jpg",        cat: "ballantines",    brand: "Ballantine's",       type: "Neon bar" },
-    { src: "images/ballantines/ballantines-shop-aisle-01.jpg",           cat: "ballantines",    brand: "Ballantine's",       type: "Shop aisle" },
-    { src: "images/ballantines/ballantines-counter-wood-01.jpg",         cat: "ballantines",    brand: "Ballantine's",       type: "Wood counter" },
-    { src: "images/ballantines/ballantines-neon-storefront-01.jpg",      cat: "ballantines",    brand: "Ballantine's",       type: "Neon storefront" },
-    { src: "images/ballantines/ballantines-100pipers-aisle-01.jpg",      cat: "ballantines",    brand: "Ballantine's",       type: "Retail aisle" },
-    // Jameson
-    { src: "images/jameson/jameson-premium-shop-01.jpg",                 cat: "jameson",        brand: "Jameson",            type: "Premium shop" },
-    { src: "images/jameson/jameson-shop-interior-01.jpg",                cat: "jameson",        brand: "Jameson",            type: "Shop interior" },
-    { src: "images/jameson/jameson-glenfiddich-aisle-01.jpg",            cat: "jameson",        brand: "Jameson",            type: "Branded aisle" },
-    // Johnnie Walker
-    { src: "images/johnnie-walker/johnnie-walker-signature-blend-01.jpg", cat: "johnnie-walker", brand: "Johnnie Walker",     type: "Signature display" },
-    { src: "images/johnnie-walker/johnnie-walker-wall-display-01.jpg",    cat: "johnnie-walker", brand: "Johnnie Walker",     type: "Wall display" },
-    { src: "images/events/gold-label-reserve-tray-01.jpg",               cat: "johnnie-walker", brand: "Gold Label Reserve", type: "Event service" },
-    // Black Dog
-    { src: "images/black-dog/black-dog-counter-gold-01.jpg",             cat: "black-dog",      brand: "Black Dog",          type: "Gold counter" },
-    // Blenders Pride / Royal Stag / Oaken Glow
-    { src: "images/blenders-royalstag/oaken-glow-bar-counter-01.jpg",    cat: "blenders",       brand: "Oaken Glow",         type: "Bar counter" },
-    { src: "images/blenders-royalstag/blenders-pride-aisle-01.jpg",      cat: "blenders",       brand: "Blenders Pride",     type: "Branded aisle" },
-    { src: "images/blenders-royalstag/oaken-glow-counter-01.jpg",        cat: "blenders",       brand: "Oaken Glow",         type: "Counter build" },
-    { src: "images/shops/royal-stag-shop-wall-01.jpg",                   cat: "blenders",       brand: "Royal Stag",         type: "Shop wall" },
-    { src: "images/blenders-royalstag/retail-floor-display-island-01.jpg", cat: "blenders",     brand: "Blenders Pride",     type: "Floor island" },
-    // 100 Pipers
-    { src: "images/100-pipers/100pipers-display-stand-01.jpg",           cat: "pipers",         brand: "100 Pipers",         type: "Display stand" },
-    { src: "images/shops/100pipers-bar-counter-01.jpg",                  cat: "pipers",         brand: "100 Pipers",         type: "Bar counter" },
-    { src: "images/shops/100pipers-shop-floor-01.jpg",                   cat: "pipers",         brand: "100 Pipers",         type: "Shop floor" },
-    // Premium shops & interiors
-    { src: "images/shops/talisker-island-display-01.jpg",                cat: "shops",          brand: "Talisker",           type: "Island display" },
-    { src: "images/shops/talisker-arch-display-01.jpg",                  cat: "shops",          brand: "Talisker",           type: "Arch display" },
-    { src: "images/shops/monkey-shoulder-counter-01.jpg",                cat: "shops",          brand: "Monkey Shoulder",    type: "Counter build" },
-    { src: "images/shops/premium-shop-central-island-01.jpg",            cat: "shops",          brand: "Premium Retail",     type: "Central island" },
-    { src: "images/shops/wine-shop-interior-island-01.jpg",              cat: "shops",          brand: "Wine Retail",        type: "Shop interior" },
-    { src: "images/shops/jacobs-creek-wine-wall-01.jpg",                 cat: "shops",          brand: "Jacob's Creek",      type: "Wine wall" },
-    { src: "images/shops/passport-green-counter-01.jpg",                 cat: "shops",          brand: "Passport",           type: "Counter build" },
-    { src: "images/shops/bright-shop-floor-01.jpg",                      cat: "shops",          brand: "Premium Retail",     type: "Full fit-out" },
-    { src: "images/shops/long-aisle-shop-01.jpg",                        cat: "shops",          brand: "Premium Retail",     type: "Aisle fit-out" },
-    { src: "images/shops/airport-style-shop-01.jpg",                     cat: "shops",          brand: "Premium Retail",     type: "Travel-retail style" },
-    { src: "images/events/campo-viejo-colourful-bar-01.jpg",             cat: "shops",          brand: "Campo Viejo",        type: "Event bar" },
+  /* lazy background video (craft) */
+  new IntersectionObserver((es)=>es.forEach(e=>{ const v=e.target;
+    if(e.isIntersecting){ if(v.dataset.src&&!v.src)v.src=v.dataset.src; v.play&&v.play().catch(()=>{}); } else v.pause&&v.pause();
+  }),{threshold:.2}).observe($("video[data-lazy]"));
+
+  /* data */
+  const LIGHTS=[
+    {src:"loops/06-absolut-neon-bottles.mp4",brand:"Absolut",type:"Neon bottle wall"},
+    {src:"loops/08-absolut-equalizer.mp4",brand:"Absolut",type:"LED equaliser"},
+    {src:"loops/07-ballantines-led-storefront.mp4",brand:"Ballantine's",type:"LED storefront"},
+    {src:"loops/30-soorahi-led-sign.mp4",brand:"Soorahi",type:"Illuminated sign"},
+    {src:"loops/27-seagrams-xclamation-neon.mp4",brand:"Seagram's Xclamation",type:"Neon"},
+    {src:"loops/24-glenfiddich-logo.mp4",brand:"Glenfiddich",type:"Brand film"}
   ];
+  const WORK=[
+    {src:"loops/31-full-store-walkthrough.mp4",brand:"Premium Shops",type:"Complete fit-out",f:"shops"},
+    {img:"images/site/hero-3-glenfiddich.jpg",brand:"Glenfiddich",type:"Event bar",f:"glenfiddich"},
+    {src:"loops/05-jameson-solemates-podium.mp4",brand:"Jameson",type:"Illuminated podium",f:"jameson"},
+    {img:"images/site/work-chivas.jpg",brand:"Chivas · Glenlivet",type:"Shop counter",f:"chivas"},
+    {src:"loops/28-glenlivet-trolley.mp4",brand:"The Glenlivet",type:"Marble trolley",f:"glenlivet"},
+    {src:"loops/33-hundred-pipers-wall.mp4",brand:"100 Pipers",type:"Backlit wall",f:"pipers"},
+    {img:"images/site/work-blenders.jpg",brand:"Blenders Pride",type:"Retail aisle",f:"seagram"},
+    {src:"loops/26-blenders-pride-expo.mp4",brand:"Blenders Pride",type:"Exhibition booth",f:"seagram"},
+    {src:"loops/10-absolut-celebrate-cart.mp4",brand:"Absolut",type:"Celebrate bar cart",f:"absolut"},
+    {img:"images/site/work-jameson.jpg",brand:"Jameson",type:"Shop interior",f:"jameson"},
+    {src:"loops/17-shop-glass-displays.mp4",brand:"Premium Shops",type:"Glass displays",f:"shops"},
+    {img:"images/site/work-talisker.jpg",brand:"Talisker",type:"Island display",f:"shops"},
+    {src:"loops/30-soorahi-led-sign.mp4",brand:"Soorahi",type:"Illuminated sign",f:"soorahi"},
+    {src:"loops/36-hundred-pipers-lounge.mp4",brand:"100 Pipers",type:"Lounge build",f:"pipers"},
+    {img:"images/site/work-shopfloor.jpg",brand:"Premium Shops",type:"Duty-free floor",f:"shops"}
+  ];
+  const REELS=[
+    ["reels/37-glenfiddich-lounge.mp4","Glenfiddich · Lounge"],
+    ["reels/01-glenfiddich-stag-wall.mp4","Glenfiddich · Stag wall"],
+    ["reels/21-absolut-infinity-mirror.mp4","Absolut · Infinity mirror"],
+    ["reels/19-copper-pipe-craft.mp4","In-house · Copper craft"],
+    ["reels/13-absolut-bottle-shelf.mp4","Absolut · Bottle shelf"],
+    ["reels/04-soorahi-launch-stage.mp4","Soorahi · Launch stage"],
+    ["reels/02-premium-shop-interior.mp4","Shops · Interior"]
+  ];
+  const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
 
-  /* ============ Hero: the lit back-bar wall ============ */
-  const heroGrid = document.getElementById("heroGrid");
-  if (heroGrid) {
-    // A curated, visually rich subset for the wall (24 = 6×4 on desktop).
-    const WALL = [
-      "images/chivas/chivas-lounge-display-01.jpg",
-      "images/glenfiddich/glenfiddich-event-bar-blue-01.jpg",
-      "images/shops/glenlivet-barrel-lounge-01.jpg",
-      "images/shops/talisker-arch-display-01.jpg",
-      "images/blenders-royalstag/oaken-glow-bar-counter-01.jpg",
-      "images/johnnie-walker/johnnie-walker-wall-display-01.jpg",
-      "images/ballantines/ballantines-neon-bar-blue-01.jpg",
-      "images/jameson/jameson-premium-shop-01.jpg",
-      "images/shops/monkey-shoulder-counter-01.jpg",
-      "images/shops/talisker-island-display-01.jpg",
-      "images/chivas/chivas-lounge-armchairs-01.jpg",
-      "images/shops/100pipers-bar-counter-01.jpg",
-      "images/blenders-royalstag/blenders-pride-aisle-01.jpg",
-      "images/shops/royal-stag-shop-wall-01.jpg",
-      "images/shops/passport-green-counter-01.jpg",
-      "images/glenlivet/glenlivet-shop-interior-01.jpg",
-      "images/ballantines/ballantines-shop-aisle-01.jpg",
-      "images/shops/wine-shop-interior-island-01.jpg",
-      "images/black-dog/black-dog-counter-gold-01.jpg",
-      "images/events/campo-viejo-colourful-bar-01.jpg",
-      "images/shops/glenlivet-wood-lounge-01.jpg",
-      "images/jameson/jameson-shop-interior-01.jpg",
-      "images/shops/airport-style-shop-01.jpg",
-      "images/blenders-royalstag/oaken-glow-counter-01.jpg",
-    ];
-    const frag = document.createDocumentFragment();
-    WALL.forEach((src, i) => {
-      const cell = document.createElement("div");
-      cell.className = "niche";
-      const img = document.createElement("img");
-      img.src = src; img.alt = "";
-      img.loading = i < 12 ? "eager" : "lazy";
-      img.decoding = "async";
-      cell.appendChild(img);
-      frag.appendChild(cell);
-    });
-    heroGrid.appendChild(frag);
-
-    // The spotlight: brighten niches near the cursor. Desktop + motion only.
-    const niches = [...heroGrid.querySelectorAll(".niche")];
-    const imgs = niches.map((n) => n.querySelector("img"));
-    if (fine && !reduce) {
-      const RADIUS = 360;          // px of influence
-      let rects = [], raf = 0, mx = -9999, my = -9999, dirty = false;
-      const measure = () => { rects = niches.map((n) => n.getBoundingClientRect()); };
-      const paint = () => {
-        raf = 0;
-        for (let i = 0; i < rects.length; i++) {
-          const r = rects[i];
-          const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-          const d = Math.hypot(mx - cx, my - cy);
-          const lit = Math.max(0, 1 - d / RADIUS);
-          imgs[i].style.setProperty("--lit", (lit * lit).toFixed(3));
-        }
-      };
-      const hero = document.querySelector(".hero");
-      hero.addEventListener("pointermove", (e) => {
-        mx = e.clientX; my = e.clientY;
-        if (!dirty) { measure(); dirty = true; }   // measure lazily on first move
-        if (!raf) raf = requestAnimationFrame(paint);
-      });
-      hero.addEventListener("pointerleave", () => {
-        mx = my = -9999;
-        if (!raf) raf = requestAnimationFrame(paint);
-      });
-      window.addEventListener("resize", () => { dirty = false; }, { passive: true });
-      window.addEventListener("scroll", () => { if (dirty) { measure(); if (!raf) raf = requestAnimationFrame(paint); } }, { passive: true });
-    } else {
-      // Touch / reduced motion: a gentle static illumination so the wall still reads as "lit".
-      imgs.forEach((img, i) => img.style.setProperty("--lit", (0.32 + (i % 5) * 0.12).toFixed(2)));
+  /* build a landscape media tile (video or image) */
+  function tile(item,list,i){
+    const el=document.createElement("div"); el.className="m-tile"; if(item.f) el.dataset.f=item.f;
+    const pos=item.img||poster(item.src);
+    el.innerHTML=`<img src="${pos}" alt="${item.brand}, ${item.type}" loading="lazy">`+
+      (item.src?`<video muted loop playsinline preload="none" poster="${pos}"></video><span class="m-tile__play">&#9654;</span>`:"")+
+      `<div class="m-tile__cap"><span class="m-tile__brand">${item.brand}</span><span class="m-tile__type">${item.type}</span></div>`;
+    if(item.src){ const v=el.querySelector("video");
+      const play=()=>{ if(!v.src)v.src=V+item.src; v.play().then(()=>el.classList.add("is-playing")).catch(()=>{}); };
+      const stop=()=>{ v.pause(); el.classList.remove("is-playing"); };
+      if(fine){ el.addEventListener("mouseenter",play); el.addEventListener("mouseleave",stop); }
     }
+    el.addEventListener("click",()=>openLbx(list,i));
+    return el;
   }
+  const lg=$("#lightsGrid"); LIGHTS.forEach((it,i)=>lg.appendChild(tile(it,LIGHTS,i)));
+  const wg=$("#workGrid"); const wtiles=WORK.map((it,i)=>{ const t=tile(it,WORK,i); wg.appendChild(t); return t; });
 
-  /* ============ Render gallery ============ */
-  const gallery = document.getElementById("gallery");
-  if (gallery) {
-    const frag = document.createDocumentFragment();
-    PROJECTS.forEach((p, i) => {
-      const card = document.createElement("button");
-      card.type = "button";
-      card.className = "card";
-      card.dataset.cat = p.cat;
-      card.dataset.index = i;
-      card.setAttribute("aria-label", `${p.brand} — ${p.type}. Open larger view.`);
-      card.innerHTML =
-        `<span class="card__imgwrap"><img src="${p.src}" alt="${p.brand} — ${p.type}, designed and built by Brand Image Solutions" loading="lazy" decoding="async"></span>` +
-        `<span class="card__meta"><span class="card__brand">${p.brand}</span><span class="card__type">${p.type}</span></span>`;
-      frag.appendChild(card);
-    });
-    gallery.appendChild(frag);
-  }
+  /* filters */
+  $$(".chip").forEach(c=>c.addEventListener("click",()=>{
+    $$(".chip").forEach(x=>{ x.classList.remove("is-on"); x.setAttribute("aria-pressed",false); });
+    c.classList.add("is-on"); c.setAttribute("aria-pressed",true);
+    const f=c.dataset.filter;
+    wtiles.forEach((t,i)=>t.classList.toggle("is-hidden", !(f==="all"||WORK[i].f===f)));
+  }));
 
-  /* ============ Filters ============ */
-  const filterWrap = document.getElementById("filters");
-  if (filterWrap && gallery) {
-    filterWrap.addEventListener("click", (e) => {
-      const btn = e.target.closest(".filter");
-      if (!btn) return;
-      filterWrap.querySelectorAll(".filter").forEach((b) => {
-        b.classList.toggle("is-active", b === btn);
-        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-      });
-      const f = btn.dataset.filter;
-      gallery.querySelectorAll(".card").forEach((c) => {
-        const show = f === "all" || c.dataset.cat === f;
-        if (show) {
-          c.classList.remove("is-hidden");
-          if (!reduce) {
-            c.classList.add("is-entering");
-            requestAnimationFrame(() => requestAnimationFrame(() => c.classList.remove("is-entering")));
-          }
-        } else {
-          c.classList.add("is-hidden");
-        }
-      });
-    });
-  }
-
-  /* ============ Lightbox with prev / next ============ */
-  const lb = document.getElementById("lightbox");
-  if (lb && gallery) {
-    const lbImg   = document.getElementById("lightboxImg");
-    const lbCap   = document.getElementById("lightboxCap");
-    const lbSub   = document.getElementById("lightboxSub");
-    const lbCount = document.getElementById("lightboxCount");
-    let order = [], pos = 0;
-
-    const visibleIndices = () =>
-      [...gallery.querySelectorAll(".card")]
-        .filter((c) => !c.classList.contains("is-hidden"))
-        .map((c) => +c.dataset.index);
-
-    const show = (i) => {
-      const p = PROJECTS[i];
-      lbImg.src = p.src;
-      lbImg.alt = `${p.brand} — ${p.type}, designed and built by Brand Image Solutions`;
-      lbCap.textContent = p.brand;
-      lbSub.textContent = p.type;
-      lbCount.textContent = `${pos + 1} / ${order.length}`;
-    };
-    const step = (dir) => {
-      if (!order.length) return;
-      pos = (pos + dir + order.length) % order.length;
-      show(order[pos]);
-    };
-
-    gallery.addEventListener("click", (e) => {
-      const card = e.target.closest(".card");
-      if (!card) return;
-      order = visibleIndices();
-      pos = order.indexOf(+card.dataset.index);
-      show(order[pos]);
-      lb.showModal();
-    });
-    document.getElementById("lightboxClose").addEventListener("click", () => lb.close());
-    document.getElementById("lightboxPrev").addEventListener("click", () => step(-1));
-    document.getElementById("lightboxNext").addEventListener("click", () => step(1));
-    lb.addEventListener("click", (e) => {
-      // close only when clicking the backdrop area, not the figure/controls
-      if (e.target === lb) lb.close();
-    });
-    lb.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-      else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-    });
-  }
-
-  /* ============ Reveal on scroll ============ */
-  const revealEls = document.querySelectorAll("[data-reveal]");
-  if ("IntersectionObserver" in window && !reduce) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add("in"));
-  }
-
-  /* ============ Count-up ledger ============ */
-  const nums = document.querySelectorAll(".ledger__num [data-count]");
-  if (nums.length) {
-    const run = (el) => {
-      const target = parseInt(el.dataset.count, 10);
-      const suffix = el.dataset.suffix || "";
-      if (reduce) { el.textContent = target + suffix; return; }
-      const t0 = performance.now(), dur = 1500;
-      const tick = (t) => {
-        const p = Math.min((t - t0) / dur, 1);
-        const e = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * e) + suffix;
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-    const io2 = new IntersectionObserver((entries) => {
-      entries.forEach((en) => { if (en.isIntersecting) { run(en.target); io2.unobserve(en.target); } });
-    }, { threshold: 0.6 });
-    nums.forEach((n) => io2.observe(n));
-  }
-
-  /* ============ Nav: solid on scroll + mobile menu ============ */
-  const nav = document.getElementById("nav");
-  const onNav = () => nav.classList.toggle("is-solid", window.scrollY > 24);
-  onNav();
-  window.addEventListener("scroll", onNav, { passive: true });
-
-  const toggle = document.getElementById("navToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-  toggle.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!open));
-    mobileMenu.classList.toggle("is-open", !open);
-  });
-  mobileMenu.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") {
-      toggle.setAttribute("aria-expanded", "false");
-      mobileMenu.classList.remove("is-open");
-    }
+  /* reels */
+  const rt=$("#reelTrack");
+  REELS.forEach(([src,cap],i)=>{
+    const r=document.createElement("div"); r.className="reel";
+    r.innerHTML=`<img src="${poster(src)}" alt="" loading="lazy"><video muted loop playsinline preload="none" poster="${poster(src)}"></video><span class="reel__cap">${cap}</span>`;
+    const v=r.querySelector("video");
+    const play=()=>{ if(!v.src)v.src=V+src; v.play().then(()=>r.classList.add("is-playing")).catch(()=>{}); };
+    const stop=()=>{ v.pause(); r.classList.remove("is-playing"); };
+    if(fine){ r.addEventListener("mouseenter",play); r.addEventListener("mouseleave",stop); }
+    else new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?play():stop()),{threshold:.6}).observe(r);
+    r.addEventListener("click",()=>openLbx(REELS.map(x=>({src:x[0],brand:x[1].split(" · ")[0],type:x[1].split(" · ")[1]||""})),i));
+    rt.appendChild(r);
   });
 
-  /* ============ Approach: pinned numbered build sequence ============ */
-  const track = document.getElementById("approachTrack");
-  const stepEls = [...document.querySelectorAll(".step")];
-  const fill = document.getElementById("approachFill");
-  const ghost = document.getElementById("approachGhost");
-  if (track && stepEls.length && !reduce && window.matchMedia("(min-width:1025px)").matches) {
-    const steps = stepEls.length;
-    let active = -1;
-    const setActive = (i) => {
-      if (i === active) return;
-      active = i;
-      stepEls.forEach((el, j) => el.classList.toggle("is-active", j === i));
-      if (fill) fill.style.width = (((i + 1) / steps) * 100).toFixed(1) + "%";
-      if (ghost) ghost.textContent = String(i + 1).padStart(2, "0");
-    };
-    let ticking = false;
-    const onScroll = () => {
-      const rect = track.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      const progress = Math.min(Math.max(-rect.top / total, 0), 1);
-      setActive(Math.min(Math.floor(progress * steps), steps - 1));
-      ticking = false;
-    };
-    window.addEventListener("scroll", () => {
-      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-    }, { passive: true });
-    onScroll();
-  } else if (stepEls.length) {
-    stepEls.forEach((el) => el.classList.add("is-active"));
-    if (fill) fill.style.width = "100%";
+  /* lightbox */
+  const lbx=$("#lbx"),box=$("#lbxMedia"),lb=$("#lbxBrand"),lt=$("#lbxType"),lc=$("#lbxCount");
+  let LIST=[],idx=0;
+  function openLbx(list,i){ LIST=list; idx=i; render(); if(!lbx.open) lbx.showModal(); }
+  function render(){ const it=LIST[idx]; box.innerHTML="";
+    if(it.src){ const v=document.createElement("video"); v.src=V+it.src; v.controls=v.autoplay=v.loop=v.playsInline=true; v.poster=poster(it.src); box.appendChild(v); }
+    else { const im=document.createElement("img"); im.src=it.img; im.alt=it.brand; box.appendChild(im); }
+    lb.textContent=it.brand||""; lt.textContent=it.type||"";
+    lc.textContent=LIST.length>1?String(idx+1).padStart(2,"0")+" / "+String(LIST.length).padStart(2,"0"):"";
   }
+  const go=d=>{ idx=(idx+d+LIST.length)%LIST.length; render(); };
+  $("#lbxNext").addEventListener("click",()=>go(1));
+  $("#lbxPrev").addEventListener("click",()=>go(-1));
+  $("#lbxClose").addEventListener("click",()=>lbx.close());
+  lbx.addEventListener("click",e=>{ if(e.target===lbx) lbx.close(); });
+  lbx.addEventListener("close",()=>box.innerHTML="");
+  addEventListener("keydown",e=>{ if(!lbx.open)return; if(e.key==="ArrowRight")go(1); if(e.key==="ArrowLeft")go(-1); });
 
-  /* ============ Enquiry form (mailto handoff) ============ */
-  const form = document.getElementById("enquiryForm");
-  if (form) {
-    const status = document.getElementById("formStatus");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      const d = new FormData(form);
-      const subject = encodeURIComponent(`Project enquiry — ${d.get("company")}`);
-      const body = encodeURIComponent(
-        `Name: ${d.get("name")}\nCompany: ${d.get("company")}\nEmail: ${d.get("email")}\n\n${d.get("message")}`
-      );
-      window.location.href = `mailto:rajan@brandimagesolutions.co.in?subject=${subject}&body=${body}`;
-      status.textContent = "Opening your email app with the enquiry pre-filled…";
-      form.reset();
-    });
-  }
+  /* contact -> WhatsApp */
+  $("#form").addEventListener("submit",e=>{ e.preventDefault();
+    const n=$("#f-name").value.trim(),c=$("#f-company").value.trim(),m=$("#f-msg").value.trim(),s=$("#formStatus");
+    if(!n||!m){ s.textContent="Please add your name and a short brief."; return; }
+    const t=`Hi Brand Image Solutions,%0A%0AName: ${encodeURIComponent(n)}%0A`+(c?`Brand/Company: ${encodeURIComponent(c)}%0A`:"")+`%0A${encodeURIComponent(m)}`;
+    s.textContent="Opening WhatsApp...";
+    window.open(`https://wa.me/919811040405?text=${t}`,"_blank","noopener");
+    setTimeout(()=>{ s.textContent="Chat opened. If nothing happened, message us at +91 98110 40405."; },800);
+  });
 
-  /* ============ Footer year ============ */
-  const yr = document.getElementById("year");
-  if (yr) yr.textContent = new Date().getFullYear();
-
-  /* ============ Loader: dismiss once the page is ready ============ */
-  const loader = document.getElementById("loader");
-  if (loader) {
-    if (reduce) { loader.remove(); }
-    else {
-      const done = () => { loader.classList.add("is-done"); setTimeout(() => loader.remove(), 900); };
-      const start = performance.now();
-      window.addEventListener("load", () => {
-        const wait = Math.max(0, 1500 - (performance.now() - start)); // let the "lights up" play
-        setTimeout(done, wait);
-      });
-      // safety: never trap the user behind the loader
-      setTimeout(done, 4000);
-    }
-  }
+  $("#year").textContent=new Date().getFullYear();
 })();
